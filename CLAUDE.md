@@ -19,6 +19,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `PRD模板.md` | 页面簇/工作流单元级 PRD 模板 | 每篇 PRD 必须内置”必读清单” |
 | `数据治理平台角色与权限说明.md` | 统一定义角色清单、边界、菜单权限、系统自动行为 | 各 PRD 只引用本文档角色口径，不重复定义角色边界 |
 
+**详细文档分层规则见**：`产品文档工作流说明.md` §2-§3
+
 ## 流程编号体系（当前基线）
 
 - **主流程**：S1–S8
@@ -27,6 +29,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **知识库并行链路**：P1（发现）→ P2（提报）→ P3（审核）→ P4（更新知识库）→ P5（回写口径）
 
 **禁止**：在沟通时使用 Mermaid 节点变量名（如 H、E、G），必须使用业务编号（S1、G1、R1、P1 等）。
+
+## 变更传导规则
+
+| 变更类型 | 应修改的文档 | 不应修改的文档 |
+|---|---|---|
+| 功能点变化 | 产品架构文档、对应 PRD | 业务流程、产品上下文 |
+| 权限配置变化 | 角色与权限说明文档 | 业务流程、产品上下文 |
+| 流程语义变化 | 先 Mermaid → 再总览表 → 必要时产品架构 | 产品上下文 |
+| 稳定业务边界变化 | 产品上下文 | - |
 
 ## 文件修改规范
 
@@ -53,3 +64,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - PRD 编写：按页面簇/工作流单元拆分，必须内置”必读清单”
 - 功能文档新增：使用 `write-feature-doc` 技能
 - 计划文档保存路径：`.claude/plan/`
+
+## AI 进入功能的默认读取顺序
+
+1. 产品上下文 → 2. 产品架构文档 → 3. 当前 PRD → 4. 当前 PRD 指向的专题文档
+
+**禁止**：要求 AI 先通读全部 PRD，或在 PRD 中重复整份产品背景与全量模块说明。
